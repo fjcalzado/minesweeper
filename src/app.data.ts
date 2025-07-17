@@ -11,8 +11,7 @@ export const generateMineData = (
   ySize: number,
   mineCount: number = 1
 ): MineData[] => {
-  if (!xSize || !ySize || !mineCount || mineCount >= xSize * ySize)
-    return undefined;
+  if (!xSize || !ySize || !mineCount || mineCount >= xSize * ySize) return undefined;
 
   // Initialize a base array
   const size = xSize * ySize;
@@ -33,6 +32,24 @@ export const generateMineData = (
   logMineData(mineData, xSize, ySize);
 
   return mineData;
+};
+
+export const generateHint = (mineData: MineData[]) => {
+  let count = 0;
+  for (const cell of mineData) {
+    if (cell.revealed && cell.mine) {
+      count = -1;
+      break;
+    } else if (!cell.revealed && !cell.mine) count++;
+  }
+  switch (count) {
+    case -1:
+      return `💥 Game over 💥 Try again`;
+    case 0:
+      return "🎉 You win!!! 🎉";
+    default:
+      return `⏳ Remaining ${count}`;
+  }
 };
 
 const generateRandomIndex = (size: number) => Math.floor(Math.random() * size);
