@@ -1,12 +1,6 @@
 import React from "react";
+import config from "./env.config";
 import { generateHint, generateMineData } from "./app.data";
-
-/**
- * Constants
- */
-const X_SIZE = 3;
-const Y_SIZE = 3;
-const MINES = 2;
 
 /**
  * App component
@@ -14,7 +8,7 @@ const MINES = 2;
 export const App: React.FC = () => {
   // State
   const [mineList, setMineList] = React.useState(() =>
-    generateMineData(X_SIZE, Y_SIZE, MINES).flat()
+    generateMineData(config.xSize, config.ySize, config.mines).flat()
   );
 
   // Computed values
@@ -43,8 +37,8 @@ export const App: React.FC = () => {
       <div
         className={`grow grid grid-cols-2 gap-3 box-border`}
         style={{
-          gridTemplateColumns: `repeat(${X_SIZE}, minmax(0, 1fr))`,
-          gridTemplateRows: `repeat(${Y_SIZE}, minmax(0, 1fr))`,
+          gridTemplateColumns: `repeat(${config.xSize}, minmax(0, 1fr))`,
+          gridTemplateRows: `repeat(${config.ySize}, minmax(0, 1fr))`,
         }}
       >
         {mineList.map(({ mine, revealed }, key) => {
