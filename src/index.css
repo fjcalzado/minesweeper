@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* Global styles in base layer */
+@layer base {
+  html {
+    @apply bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200;
+  }
+}
